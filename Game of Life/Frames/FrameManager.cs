@@ -44,6 +44,7 @@ namespace Game_of_Life.Frames
         public FrameManager(int frameWidth, int frameHeight, bool rewind = false)
         {
             frames = new List<Frame>();
+            _currentFrameIndex = 0;
             this.rewind = rewind;
             stop = false;
         }

@@ -66,10 +66,13 @@ namespace Game_of_Life.Stucts
                 {
                     if(frameManager.NeedsNewFrame)
                     {
+                        
                         gameEnvironment.SetCells(gridCellStates);
                         gameEnvironment.Update(gridCellStates);
+                        
 
                         frameManager.AddFrame(Frame.StatesToFrame(gameEnvironment.CellStates, gameGrid.cols, gameGrid.rows));
+                        frameManager.NextFrame();
                     }
                     else if(frameManager.CurrentFrameIndex < frameManager.NbFrames-1)
                     {
@@ -85,6 +88,8 @@ namespace Game_of_Life.Stucts
             if(frameManager.CurrentFrame != null)
             {
                 gameGrid.SetLabelsFromFrame(frameManager.CurrentFrame);
+                
+                
             }
         }
 

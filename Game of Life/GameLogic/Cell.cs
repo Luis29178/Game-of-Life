@@ -28,10 +28,11 @@ namespace Game_of_Life.GameLogic
         {
             if (alive)
             {
-                if(!(numAliveNeighbours == 2) || !(numAliveNeighbours == 3))
+                if(numAliveNeighbours < 2 || numAliveNeighbours > 3)
                 {
                     alive = false;
                 }
+
             }
             else
             {

@@ -73,11 +73,12 @@ namespace Game_of_Life.GameLogic
         public void SetCells(bool[] cellStates)
         {
             cells = new List<Cell>();
+            int BrakeCounter = 0;
             foreach (bool state in cellStates)
             {
 
                 cells.Add(new Cell(state));
-
+                BrakeCounter++;
             }
         }
 
@@ -305,6 +306,7 @@ namespace Game_of_Life.GameLogic
         private void UpdateCell(int position, int nbAliveNeightbours)
         {
             cells[position].Update(nbAliveNeightbours);
+
         }
         private void UpdateCells(bool[] CellStates)
         {
