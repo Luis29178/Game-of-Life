@@ -53,28 +53,28 @@ namespace Game_of_Life.Stucts
 
             if (frameManager.rewind)
             {
-
+                frameManager.PrevFrame();
             }
             else
             {
-                if(frameManager.NbFrames == 0)
+                if (frameManager.NbFrames == 0)
                 {
-                    frameManager.AddFrame(Frame.StatesToFrame(gridCellStates,gameGrid.cols, gameGrid.rows));
+                    frameManager.AddFrame(Frame.StatesToFrame(gridCellStates, gameGrid.cols, gameGrid.rows));
                     frameManager.CurrentFrameIndex = 0;
                 }
                 else
                 {
-                    if(frameManager.NeedsNewFrame)
+                    if (frameManager.NeedsNewFrame)
                     {
-                        
+
                         gameEnvironment.SetCells(gridCellStates);
                         gameEnvironment.Update(gridCellStates);
-                        
+
 
                         frameManager.AddFrame(Frame.StatesToFrame(gameEnvironment.CellStates, gameGrid.cols, gameGrid.rows));
                         frameManager.NextFrame();
                     }
-                    else if(frameManager.CurrentFrameIndex < frameManager.NbFrames-1)
+                    else if (frameManager.CurrentFrameIndex < frameManager.NbFrames - 1)
                     {
                         StartNewFrameRoot();
                     }
@@ -85,6 +85,7 @@ namespace Game_of_Life.Stucts
 
         public void Draw()
         {
+
             if(frameManager.CurrentFrame != null)
             {
                 gameGrid.SetLabelsFromFrame(frameManager.CurrentFrame);

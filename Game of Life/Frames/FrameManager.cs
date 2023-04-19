@@ -20,7 +20,18 @@ namespace Game_of_Life.Frames
 
         public int NbFrames { get { return frames.Count; } }
 
-        public Frame CurrentFrame { get { return frames[CurrentFrameIndex]; } }
+        public Frame CurrentFrame { get {
+
+                if(frames.Count > 0)
+                { 
+                    return frames[CurrentFrameIndex]; 
+                }
+                else
+                {
+                    return null;
+                }
+            
+            } }
 
         public bool NeedsNewFrame { get { return (CurrentFrameIndex == NbFrames - 1); } }
 
@@ -72,7 +83,7 @@ namespace Game_of_Life.Frames
 
         public void NextFrame()
         {
-            CurrentFrameIndex = CurrentFrameIndex + 1;
+                CurrentFrameIndex = CurrentFrameIndex + 1; 
         }
         public void PrevFrame()
         {
@@ -88,7 +99,19 @@ namespace Game_of_Life.Frames
         }
         public void SkipToFrame(int index)
         {
-            CurrentFrameIndex = index;
+            if (index >= frames.Count)
+            {
+                CurrentFrameIndex = frames.Count;
+            }
+            else if (index < 0)
+            {
+                CurrentFrameIndex = 0;
+            }
+            else 
+            { 
+                CurrentFrameIndex = index;
+            }
+            
         }
         public void Play()
         {

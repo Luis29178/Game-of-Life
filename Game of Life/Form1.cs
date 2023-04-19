@@ -1,4 +1,5 @@
 using Game_of_Life.Editor;
+using Game_of_Life.Frames;
 using Game_of_Life.Stucts;
 using System.Windows.Forms;
 
@@ -15,8 +16,8 @@ namespace Game_of_Life
         public Form1()
         {
             InitializeComponent();
-            gameGrid = new LabelGrid(GamePanel, 5, 5, 35, 35, 1);
-            editorGrid = new LabelGrid(EditorPanel, 4, 4, 10, 10, 1);
+            gameGrid = new LabelGrid(GamePanel, 25, 25, 35, 35, 1);
+            editorGrid = new LabelGrid(EditorPanel, 5, 5, 10, 10, 1);
             gameManager = new GameManager(gameGrid);
             editor = new EditorMode(gameGrid, editorGrid);
 
@@ -77,25 +78,20 @@ namespace Game_of_Life
         }
         private void UpdateInfoDisplay()
         {
-            int currentFrameNb = gameManager.frameManager.CurrentFrameIndex + 1;
-            int nbFrames = gameManager.frameManager.NbFrames;
 
-            // Todo: add footer InfoLable named --> FrameNum displaying --> $"Frame: {crrentFrameNb}/{nbFrames}"
 
-            int nbAliveCells = 0;
-            foreach (bool state in gameGrid.GetStatesfromLabels())
+            cInfoLabel.Text = $" Cells Alive: {gameGrid.GetCellStateCount(Globals.Alive)} | Cells Dead: {gameGrid.GetCellStateCount(Globals.Dead)} | Total Cells: {(gameGrid.cols * gameGrid.rows)} ";
+            int tempframe = gameManager.frameManager.frames.Count - 1;
+            if (tempframe < 0)
             {
-                if (state) nbAliveCells++;
-
+                tempframe = 0;
             }
-            int nbCells = gameGrid.labels.Count;
-            int nbDeadCells = nbCells - nbAliveCells;
+            fInfoLabel.Text = $"Frame: {gameManager.frameManager.CurrentFrameIndex}/{tempframe}";
 
-            // Todo: add footer InfoLable named --> CellInfo displaying --> $"Live Cells: {nbAliveCells} | Dead Cells: {nbDeadCells} | Total Cells: {nbCells}"
+            OnFrame.Maximum = tempframe;
 
-            string mode = editor.mode.ToString();
 
-            // Todo: add footer InfoLable named --> ModeState displaying --> $"Mode: {mode}"
+
 
 
         }
@@ -118,6 +114,7 @@ namespace Game_of_Life
         private void plus_click(object sender, EventArgs e)
         {
             gameManager.frameManager.NextFrame();
+
             gameManager.Draw();
             UpdateInfoDisplay();
         }
@@ -170,7 +167,7 @@ namespace Game_of_Life
 
         private void GotoFrame_click(object sender, EventArgs e)
         {
-            gameManager.frameManager.SkipToFrame((int)0/*Pull value From property*/);
+            gameManager.frameManager.SkipToFrame((int)OnFrame.Value);
             gameManager.Draw();
             UpdateInfoDisplay();
         }
@@ -230,6 +227,19 @@ namespace Game_of_Life
             UpdateInfoDisplay();
         }
 
+        private void MInfoLabel_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

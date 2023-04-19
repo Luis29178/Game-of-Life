@@ -31,31 +31,33 @@
             components = new System.ComponentModel.Container();
             Play = new Button();
             Reset = new Button();
-            Forward = new Button();
             Rewin = new Button();
             label1 = new Label();
             SpeedBar = new TrackBar();
             SpeedValue = new Label();
             NavPanel = new Panel();
+            OnFrame = new NumericUpDown();
+            panel1 = new Panel();
+            label3 = new Label();
+            ClearGame = new Button();
             FramesToSkip = new NumericUpDown();
             FramesToSkipLabel = new Label();
-            OnFrame = new TextBox();
             FrameCountLabel = new Label();
-            NavStart = new Button();
+            goToFrame = new Button();
+            GameInverse = new Button();
             Forward3x = new Button();
             Minus = new Button();
             Plus = new Button();
             Forward1x = new Button();
             Reverse1x = new Button();
             Reverse3x = new Button();
-            label3 = new Label();
+            GameTitle = new Panel();
+            GridGameLable = new Label();
             EditorParentPanel = new Panel();
-            ClearGame = new Button();
             BrushSizeLable = new Label();
             BrushSizeValue = new NumericUpDown();
             EditorY = new NumericUpDown();
             EditorX = new NumericUpDown();
-            GameInverse = new Button();
             EditorReset = new Button();
             EditorClear = new Button();
             CopyFrame = new Button();
@@ -64,8 +66,6 @@
             LoadFrame = new Button();
             BrushTitle = new Panel();
             Brush = new Label();
-            GameTitle = new Panel();
-            GridGameLable = new Label();
             EditorTitle = new Panel();
             EditGridMenu = new Label();
             DimensionsLable = new Label();
@@ -73,16 +73,30 @@
             EditorPanel = new Panel();
             GamePanel = new Panel();
             tmrUpdate = new System.Windows.Forms.Timer(components);
+            MInfoLabel = new Label();
+            cInfoLabel = new Label();
+            fInfoLabel = new Label();
+            numericUpDown1 = new NumericUpDown();
+            numericUpDown2 = new NumericUpDown();
+            label2 = new Label();
+            panel2 = new Panel();
+            GridTitleLabel = new Label();
+            GridApply = new Button();
             ((System.ComponentModel.ISupportInitialize)SpeedBar).BeginInit();
             NavPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)OnFrame).BeginInit();
+            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)FramesToSkip).BeginInit();
+            GameTitle.SuspendLayout();
             EditorParentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)BrushSizeValue).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EditorY).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EditorX).BeginInit();
             BrushTitle.SuspendLayout();
-            GameTitle.SuspendLayout();
             EditorTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // Play
@@ -107,29 +121,20 @@
             Reset.UseVisualStyleBackColor = true;
             Reset.Click += Reset_Click;
             // 
-            // Forward
-            // 
-            Forward.Location = new Point(306, 34);
-            Forward.Name = "Forward";
-            Forward.Size = new Size(121, 23);
-            Forward.TabIndex = 2;
-            Forward.Text = "--> ";
-            Forward.UseVisualStyleBackColor = true;
-            // 
             // Rewin
             // 
             Rewin.Location = new Point(179, 34);
             Rewin.Name = "Rewin";
             Rewin.Size = new Size(121, 23);
             Rewin.TabIndex = 3;
-            Rewin.Text = "<-- ";
+            Rewin.Text = "-->";
             Rewin.UseVisualStyleBackColor = true;
             Rewin.Click += Rewind_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(433, 38);
+            label1.Location = new Point(306, 38);
             label1.Name = "label1";
             label1.Size = new Size(45, 15);
             label1.TabIndex = 4;
@@ -137,13 +142,15 @@
             // 
             // SpeedBar
             // 
-            SpeedBar.Location = new Point(484, 24);
+            SpeedBar.LargeChange = 50;
+            SpeedBar.Location = new Point(357, 24);
             SpeedBar.Maximum = 1000;
             SpeedBar.Minimum = 10;
             SpeedBar.Name = "SpeedBar";
-            SpeedBar.Size = new Size(137, 45);
+            SpeedBar.Size = new Size(264, 45);
             SpeedBar.SmallChange = 10;
             SpeedBar.TabIndex = 5;
+            SpeedBar.TickFrequency = 10;
             SpeedBar.Value = 1000;
             SpeedBar.ValueChanged += hscSpeed_ValueChaned;
             // 
@@ -159,22 +166,58 @@
             // NavPanel
             // 
             NavPanel.BackColor = SystemColors.ScrollBar;
+            NavPanel.Controls.Add(OnFrame);
+            NavPanel.Controls.Add(panel1);
             NavPanel.Controls.Add(FramesToSkip);
             NavPanel.Controls.Add(FramesToSkipLabel);
-            NavPanel.Controls.Add(OnFrame);
             NavPanel.Controls.Add(FrameCountLabel);
-            NavPanel.Controls.Add(NavStart);
+            NavPanel.Controls.Add(goToFrame);
             NavPanel.Controls.Add(Forward3x);
             NavPanel.Controls.Add(Minus);
             NavPanel.Controls.Add(Plus);
             NavPanel.Controls.Add(Forward1x);
             NavPanel.Controls.Add(Reverse1x);
             NavPanel.Controls.Add(Reverse3x);
-            NavPanel.Controls.Add(label3);
-            NavPanel.Location = new Point(12, 600);
+            NavPanel.Location = new Point(12, 709);
             NavPanel.Name = "NavPanel";
-            NavPanel.Size = new Size(644, 68);
+            NavPanel.Size = new Size(640, 68);
             NavPanel.TabIndex = 7;
+            // 
+            // OnFrame
+            // 
+            OnFrame.InterceptArrowKeys = false;
+            OnFrame.Location = new Point(512, 32);
+            OnFrame.Name = "OnFrame";
+            OnFrame.Size = new Size(56, 23);
+            OnFrame.TabIndex = 22;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.AppWorkspace;
+            panel1.Controls.Add(label3);
+            panel1.Location = new Point(10, 6);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(627, 15);
+            panel1.TabIndex = 8;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(0, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(59, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Navigator";
+            // 
+            // ClearGame
+            // 
+            ClearGame.Location = new Point(13, 559);
+            ClearGame.Name = "ClearGame";
+            ClearGame.Size = new Size(176, 24);
+            ClearGame.TabIndex = 21;
+            ClearGame.Text = "Clear";
+            ClearGame.UseVisualStyleBackColor = true;
+            ClearGame.Click += ClearGame_click;
             // 
             // FramesToSkip
             // 
@@ -182,6 +225,7 @@
             FramesToSkip.Name = "FramesToSkip";
             FramesToSkip.Size = new Size(35, 23);
             FramesToSkip.TabIndex = 8;
+            FramesToSkip.Value = new decimal(new int[] { 3, 0, 0, 0 });
             // 
             // FramesToSkipLabel
             // 
@@ -192,30 +236,34 @@
             FramesToSkipLabel.TabIndex = 8;
             FramesToSkipLabel.Text = "Frames Skiped :";
             // 
-            // OnFrame
-            // 
-            OnFrame.Location = new Point(519, 32);
-            OnFrame.Name = "OnFrame";
-            OnFrame.Size = new Size(49, 23);
-            OnFrame.TabIndex = 11;
-            // 
             // FrameCountLabel
             // 
             FrameCountLabel.AutoSize = true;
-            FrameCountLabel.Location = new Point(467, 36);
+            FrameCountLabel.Location = new Point(460, 36);
             FrameCountLabel.Name = "FrameCountLabel";
             FrameCountLabel.Size = new Size(46, 15);
             FrameCountLabel.TabIndex = 9;
             FrameCountLabel.Text = "Frame :";
             // 
-            // NavStart
+            // goToFrame
             // 
-            NavStart.Location = new Point(574, 5);
-            NavStart.Name = "NavStart";
-            NavStart.Size = new Size(67, 60);
-            NavStart.TabIndex = 7;
-            NavStart.Text = "Go";
-            NavStart.UseVisualStyleBackColor = true;
+            goToFrame.Location = new Point(574, 32);
+            goToFrame.Name = "goToFrame";
+            goToFrame.Size = new Size(63, 23);
+            goToFrame.TabIndex = 7;
+            goToFrame.Text = "Go";
+            goToFrame.UseVisualStyleBackColor = true;
+            goToFrame.Click += GotoFrame_click;
+            // 
+            // GameInverse
+            // 
+            GameInverse.Location = new Point(12, 586);
+            GameInverse.Name = "GameInverse";
+            GameInverse.Size = new Size(177, 24);
+            GameInverse.TabIndex = 16;
+            GameInverse.Text = "Inverse Game";
+            GameInverse.UseVisualStyleBackColor = true;
+            GameInverse.Click += ReverseGame_click;
             // 
             // Forward3x
             // 
@@ -277,55 +325,59 @@
             Reverse3x.UseVisualStyleBackColor = true;
             Reverse3x.Click += FramesToSkipRWX_click;
             // 
-            // label3
+            // GameTitle
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(5, 5);
-            label3.Name = "label3";
-            label3.Size = new Size(59, 15);
-            label3.TabIndex = 0;
-            label3.Text = "Navigator";
+            GameTitle.BackColor = SystemColors.AppWorkspace;
+            GameTitle.Controls.Add(GridGameLable);
+            GameTitle.Location = new Point(3, 537);
+            GameTitle.Name = "GameTitle";
+            GameTitle.Size = new Size(353, 15);
+            GameTitle.TabIndex = 7;
+            // 
+            // GridGameLable
+            // 
+            GridGameLable.AutoSize = true;
+            GridGameLable.Location = new Point(3, 0);
+            GridGameLable.Name = "GridGameLable";
+            GridGameLable.Size = new Size(63, 15);
+            GridGameLable.TabIndex = 4;
+            GridGameLable.Text = "Game Grid";
             // 
             // EditorParentPanel
             // 
             EditorParentPanel.BackColor = SystemColors.ScrollBar;
-            EditorParentPanel.Controls.Add(ClearGame);
+            EditorParentPanel.Controls.Add(GridApply);
+            EditorParentPanel.Controls.Add(panel2);
+            EditorParentPanel.Controls.Add(numericUpDown1);
+            EditorParentPanel.Controls.Add(numericUpDown2);
+            EditorParentPanel.Controls.Add(label2);
             EditorParentPanel.Controls.Add(BrushSizeLable);
             EditorParentPanel.Controls.Add(BrushSizeValue);
+            EditorParentPanel.Controls.Add(ClearGame);
             EditorParentPanel.Controls.Add(EditorY);
             EditorParentPanel.Controls.Add(EditorX);
-            EditorParentPanel.Controls.Add(GameInverse);
             EditorParentPanel.Controls.Add(EditorReset);
             EditorParentPanel.Controls.Add(EditorClear);
             EditorParentPanel.Controls.Add(CopyFrame);
+            EditorParentPanel.Controls.Add(GameInverse);
             EditorParentPanel.Controls.Add(PaintMode);
             EditorParentPanel.Controls.Add(InverseEditor);
             EditorParentPanel.Controls.Add(LoadFrame);
             EditorParentPanel.Controls.Add(BrushTitle);
-            EditorParentPanel.Controls.Add(GameTitle);
             EditorParentPanel.Controls.Add(EditorTitle);
             EditorParentPanel.Controls.Add(DimensionsLable);
             EditorParentPanel.Controls.Add(EditorLable);
+            EditorParentPanel.Controls.Add(GameTitle);
             EditorParentPanel.Controls.Add(EditorPanel);
             EditorParentPanel.Location = new Point(662, 24);
             EditorParentPanel.Name = "EditorParentPanel";
-            EditorParentPanel.Size = new Size(359, 644);
+            EditorParentPanel.Size = new Size(359, 753);
             EditorParentPanel.TabIndex = 8;
-            // 
-            // ClearGame
-            // 
-            ClearGame.Location = new Point(196, 579);
-            ClearGame.Name = "ClearGame";
-            ClearGame.Size = new Size(158, 23);
-            ClearGame.TabIndex = 21;
-            ClearGame.Text = "Clear";
-            ClearGame.UseVisualStyleBackColor = true;
-            ClearGame.Click += ClearGame_click;
             // 
             // BrushSizeLable
             // 
             BrushSizeLable.AutoSize = true;
-            BrushSizeLable.Location = new Point(198, 515);
+            BrushSizeLable.Location = new Point(199, 586);
             BrushSizeLable.Name = "BrushSizeLable";
             BrushSizeLable.Size = new Size(27, 15);
             BrushSizeLable.TabIndex = 20;
@@ -333,7 +385,7 @@
             // 
             // BrushSizeValue
             // 
-            BrushSizeValue.Location = new Point(269, 508);
+            BrushSizeValue.Location = new Point(270, 579);
             BrushSizeValue.Name = "BrushSizeValue";
             BrushSizeValue.Size = new Size(67, 23);
             BrushSizeValue.TabIndex = 19;
@@ -353,18 +405,9 @@
             EditorX.Size = new Size(55, 23);
             EditorX.TabIndex = 11;
             // 
-            // GameInverse
-            // 
-            GameInverse.Location = new Point(12, 579);
-            GameInverse.Name = "GameInverse";
-            GameInverse.Size = new Size(177, 23);
-            GameInverse.TabIndex = 16;
-            GameInverse.Text = "Inverse Game";
-            GameInverse.UseVisualStyleBackColor = true;
-            GameInverse.Click += ReverseGame_click;
-            // 
             // EditorReset
             // 
+            EditorReset.Enabled = false;
             EditorReset.Location = new Point(198, 458);
             EditorReset.Name = "EditorReset";
             EditorReset.Size = new Size(158, 23);
@@ -385,17 +428,20 @@
             // 
             // CopyFrame
             // 
-            CopyFrame.ForeColor = SystemColors.AppWorkspace;
+            CopyFrame.BackColor = SystemColors.ScrollBar;
+            CopyFrame.Enabled = false;
+            CopyFrame.ForeColor = SystemColors.ControlText;
             CopyFrame.Location = new Point(198, 400);
             CopyFrame.Name = "CopyFrame";
             CopyFrame.Size = new Size(158, 23);
             CopyFrame.TabIndex = 13;
             CopyFrame.Text = "Copy Frame";
-            CopyFrame.UseVisualStyleBackColor = true;
+            CopyFrame.UseVisualStyleBackColor = false;
             CopyFrame.Click += CopyEditor_click;
             // 
             // PaintMode
             // 
+            PaintMode.Enabled = false;
             PaintMode.Location = new Point(114, 429);
             PaintMode.Name = "PaintMode";
             PaintMode.Size = new Size(75, 23);
@@ -406,6 +452,7 @@
             // 
             // InverseEditor
             // 
+            InverseEditor.Enabled = false;
             InverseEditor.Location = new Point(13, 429);
             InverseEditor.Name = "InverseEditor";
             InverseEditor.Size = new Size(78, 23);
@@ -415,6 +462,7 @@
             // 
             // LoadFrame
             // 
+            LoadFrame.Enabled = false;
             LoadFrame.Location = new Point(13, 400);
             LoadFrame.Name = "LoadFrame";
             LoadFrame.Size = new Size(176, 23);
@@ -426,7 +474,7 @@
             // 
             BrushTitle.BackColor = SystemColors.AppWorkspace;
             BrushTitle.Controls.Add(Brush);
-            BrushTitle.Location = new Point(198, 487);
+            BrushTitle.Location = new Point(199, 558);
             BrushTitle.Name = "BrushTitle";
             BrushTitle.Size = new Size(157, 15);
             BrushTitle.TabIndex = 8;
@@ -439,24 +487,6 @@
             Brush.Size = new Size(37, 15);
             Brush.TabIndex = 5;
             Brush.Text = "Brush";
-            // 
-            // GameTitle
-            // 
-            GameTitle.BackColor = SystemColors.AppWorkspace;
-            GameTitle.Controls.Add(GridGameLable);
-            GameTitle.Location = new Point(2, 555);
-            GameTitle.Name = "GameTitle";
-            GameTitle.Size = new Size(353, 15);
-            GameTitle.TabIndex = 7;
-            // 
-            // GridGameLable
-            // 
-            GridGameLable.AutoSize = true;
-            GridGameLable.Location = new Point(0, 0);
-            GridGameLable.Name = "GridGameLable";
-            GridGameLable.Size = new Size(63, 15);
-            GridGameLable.TabIndex = 4;
-            GridGameLable.Text = "Game Grid";
             // 
             // EditorTitle
             // 
@@ -499,7 +529,7 @@
             EditorPanel.BackColor = SystemColors.Control;
             EditorPanel.Location = new Point(3, 23);
             EditorPanel.Name = "EditorPanel";
-            EditorPanel.Size = new Size(353, 350);
+            EditorPanel.Size = new Size(350, 350);
             EditorPanel.TabIndex = 0;
             // 
             // GamePanel
@@ -508,7 +538,7 @@
             GamePanel.Enabled = false;
             GamePanel.Location = new Point(12, 63);
             GamePanel.Name = "GamePanel";
-            GamePanel.Size = new Size(644, 531);
+            GamePanel.Size = new Size(640, 640);
             GamePanel.TabIndex = 9;
             // 
             // tmrUpdate
@@ -516,11 +546,94 @@
             tmrUpdate.Interval = 1000;
             tmrUpdate.Tick += tmrUpdate_tick;
             // 
+            // MInfoLabel
+            // 
+            MInfoLabel.AutoSize = true;
+            MInfoLabel.Location = new Point(825, 788);
+            MInfoLabel.Name = "MInfoLabel";
+            MInfoLabel.Size = new Size(117, 15);
+            MInfoLabel.TabIndex = 10;
+            MInfoLabel.Text = "Mode: Coming Soon";
+            MInfoLabel.Click += MInfoLabel_Click;
+            // 
+            // cInfoLabel
+            // 
+            cInfoLabel.AutoSize = true;
+            cInfoLabel.Location = new Point(149, 788);
+            cInfoLabel.Name = "cInfoLabel";
+            cInfoLabel.Size = new Size(79, 15);
+            cInfoLabel.TabIndex = 11;
+            cInfoLabel.Text = "Cell Info: N/A";
+            // 
+            // fInfoLabel
+            // 
+            fInfoLabel.AutoSize = true;
+            fInfoLabel.Location = new Point(548, 788);
+            fInfoLabel.Name = "fInfoLabel";
+            fInfoLabel.Size = new Size(63, 15);
+            fInfoLabel.TabIndex = 12;
+            fInfoLabel.Text = "Frame: 0/0";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(197, 719);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(54, 23);
+            numericUpDown1.TabIndex = 23;
+            // 
+            // numericUpDown2
+            // 
+            numericUpDown2.Location = new Point(134, 719);
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(55, 23);
+            numericUpDown2.TabIndex = 24;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(26, 721);
+            label2.Name = "label2";
+            label2.Size = new Size(75, 15);
+            label2.TabIndex = 22;
+            label2.Text = "Dimensions :";
+            label2.Click += label2_Click;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = SystemColors.AppWorkspace;
+            panel2.Controls.Add(GridTitleLabel);
+            panel2.Location = new Point(6, 616);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(347, 15);
+            panel2.TabIndex = 9;
+            // 
+            // GridTitleLabel
+            // 
+            GridTitleLabel.AutoSize = true;
+            GridTitleLabel.Location = new Point(-2, 0);
+            GridTitleLabel.Name = "GridTitleLabel";
+            GridTitleLabel.Size = new Size(72, 15);
+            GridTitleLabel.TabIndex = 5;
+            GridTitleLabel.Text = "Grid Control";
+            GridTitleLabel.Click += label4_Click;
+            // 
+            // GridApply
+            // 
+            GridApply.Location = new Point(270, 717);
+            GridApply.Name = "GridApply";
+            GridApply.Size = new Size(75, 25);
+            GridApply.TabIndex = 25;
+            GridApply.Text = "Apply";
+            GridApply.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1033, 680);
+            ClientSize = new Size(1033, 808);
+            Controls.Add(fInfoLabel);
+            Controls.Add(cInfoLabel);
+            Controls.Add(MInfoLabel);
             Controls.Add(GamePanel);
             Controls.Add(EditorParentPanel);
             Controls.Add(NavPanel);
@@ -528,7 +641,6 @@
             Controls.Add(SpeedBar);
             Controls.Add(label1);
             Controls.Add(Rewin);
-            Controls.Add(Forward);
             Controls.Add(Reset);
             Controls.Add(Play);
             Name = "Form1";
@@ -536,7 +648,12 @@
             ((System.ComponentModel.ISupportInitialize)SpeedBar).EndInit();
             NavPanel.ResumeLayout(false);
             NavPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)OnFrame).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)FramesToSkip).EndInit();
+            GameTitle.ResumeLayout(false);
+            GameTitle.PerformLayout();
             EditorParentPanel.ResumeLayout(false);
             EditorParentPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)BrushSizeValue).EndInit();
@@ -544,10 +661,12 @@
             ((System.ComponentModel.ISupportInitialize)EditorX).EndInit();
             BrushTitle.ResumeLayout(false);
             BrushTitle.PerformLayout();
-            GameTitle.ResumeLayout(false);
-            GameTitle.PerformLayout();
             EditorTitle.ResumeLayout(false);
             EditorTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -556,21 +675,19 @@
 
         private Button Play;
         private Button Reset;
-        private Button Forward;
         private Button Rewin;
         private Label label1;
         private TrackBar SpeedBar;
         private Label SpeedValue;
         private Panel NavPanel;
         private Label label3;
-        private Button NavStart;
+        private Button goToFrame;
         private Button Forward3x;
         private Button Minus;
         private Button Plus;
         private Button Forward1x;
         private Button Reverse1x;
         private Button Reverse3x;
-        private TextBox OnFrame;
         private Label FrameCountLabel;
         private Label FramesToSkipLabel;
         private NumericUpDown FramesToSkip;
@@ -600,5 +717,16 @@
         private Panel GameTitle;
         private Button ClearGame;
         private System.Windows.Forms.Timer tmrUpdate;
+        private Panel panel1;
+        private Label MInfoLabel;
+        private Label cInfoLabel;
+        private Label fInfoLabel;
+        private NumericUpDown OnFrame;
+        private Panel panel2;
+        private Label GridTitleLabel;
+        private NumericUpDown numericUpDown1;
+        private NumericUpDown numericUpDown2;
+        private Label label2;
+        private Button GridApply;
     }
 }

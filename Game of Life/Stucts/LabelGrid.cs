@@ -119,6 +119,20 @@ namespace Game_of_Life.Stucts
 
 
         }
+        public int GetCellStateCount(Color getWhatState)
+        {
+            int states = 0;
+
+            for (int i = 0; i < NbLables; i++)
+            {
+                if (labels[i].BackColor == getWhatState)
+                {
+                    states++;
+                }
+            }
+
+            return states;
+        }
 
         public bool[] GetStatesfromLabels()
         {
