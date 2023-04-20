@@ -21,7 +21,7 @@ namespace Game_of_Life.Frames
         public Frame(bool[] states, int cols, int rows)
         {
             this.states = states;
-            this.cols = cols;   
+            this.cols = cols;
             this.rows = rows;
         }
 
@@ -36,14 +36,14 @@ namespace Game_of_Life.Frames
             int w = this.cols;
             int h = this.rows;
 
-            for(int y = 0; y < subFrameH; y++)
+            for (int y = 0; y < subFrameH; y++)
             {
-                for(int x = 0; x < subFrameW; x++)
+                for (int x = 0; x < subFrameW; x++)
                 {
                     int statePosition = x + (y * subFrameW);
                     int newStatePosition = positionInFraame + x + (y * w);
 
-                    if(newStatePosition <states.Count() && newStatePosition >= 0)
+                    if (newStatePosition < states.Count() && newStatePosition >= 0)
                     {
                         this.states[newStatePosition] = subFrame.states[statePosition];
                     }
@@ -51,10 +51,12 @@ namespace Game_of_Life.Frames
             }
         }
 
-        public static Frame StatesToFrame(bool[] states,int cols,int rows)
+        public static Frame StatesToFrame(bool[] states, int cols, int rows)
         {
             return new Frame(states, cols, rows);
         }
+
+
 
         public static bool[] FrameToState(Frame frame)
         {

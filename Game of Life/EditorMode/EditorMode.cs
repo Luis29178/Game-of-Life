@@ -88,6 +88,8 @@ namespace Game_of_Life.Editor
 
         private void Paste(LabelGrid grid, int pos)
         {
+
+
             Frame frame = Frame.StatesToFrame(grid.GetStatesfromLabels(), grid.cols, grid.rows);
 
             frame.blit(copiedFrame, pos);

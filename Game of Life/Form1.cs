@@ -28,6 +28,8 @@ namespace Game_of_Life
 
             SpeedValue.Text = $"{SpeedBar.Value} ms";
 
+            MInfoLabel.Text = $"Mode : Paint | Brush: Invert";
+
         }
 
         private void Play_Click(object sender, EventArgs e)
@@ -87,6 +89,8 @@ namespace Game_of_Life
                 tempframe = 0;
             }
             fInfoLabel.Text = $"Frame: {gameManager.frameManager.CurrentFrameIndex}/{tempframe}";
+
+            
 
             OnFrame.Maximum = tempframe;
 
@@ -172,20 +176,19 @@ namespace Game_of_Life
             UpdateInfoDisplay();
         }
 
-        private void CopyEditor_click(object sender, EventArgs e)
-        {
-            editor.copiedFrame = new Frames.Frame(editorGrid.GetStatesfromLabels(), editorGrid.cols, editorGrid.rows);
-            UpdateInfoDisplay();
-
-        }
         private void PasteEditor_click(Object sender, EventArgs e)
         {
+            editor.copiedFrame = new Frames.Frame(editorGrid.GetStatesfromLabelsSlim(), editorGrid.pasteCols, editorGrid.pasteRows);
             editor.mode = EditorMode.editorMode.paste;
+            PaintMode.Enabled = true;
+            MInfoLabel.Text = $"Mode : Copy";
             UpdateInfoDisplay();
         }
         private void PaintEditor_click(Object obj, EventArgs e)
         {
             editor.mode = EditorMode.editorMode.paint;
+            PaintMode.Enabled = false;
+            MInfoLabel.Text = $"Mode : Paint | Brush: Invert";
             UpdateInfoDisplay();
         }
         private void NewGrid_click(object sender, EventArgs e)
@@ -221,23 +224,7 @@ namespace Game_of_Life
             UpdateInfoDisplay();
         }
 
-        private void Paint_click(Object obj, EventArgs e)
-        {
-            editor.mode = EditorMode.editorMode.paint;
-            UpdateInfoDisplay();
-        }
-
-        private void MInfoLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
+        private void BrushTitle_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -22,6 +22,8 @@ namespace Game_of_Life.Stucts
 
         public int cols;
         public int rows;
+        public int pasteCols;
+        public int pasteRows;
         public int InternalSeperation;
         int externalSeperationX;
         int externalSeperationY;
@@ -138,12 +140,88 @@ namespace Game_of_Life.Stucts
         {
             bool[] states = new bool[NbLables];
 
+
+
             for (int i = 0; i < NbLables; i++)
             {
                 states[i] = (labels[i].BackColor == Globals.Alive);
             }
 
             return states;
+        }
+
+        public bool[] GetStatesfromLabelsSlim()
+        {
+            
+
+            int xmin = cols;
+            int ymin = rows;
+            int xmax = 0;
+            int ymax = 0;
+
+            bool[] states = GetStatesfromLabels();
+
+
+            int xtemp;
+            int ytemp;
+            for (int i = 0; i < states.Count(); i++)
+            {
+                if (states[i] == true)
+                {
+                    xtemp = (i % cols);
+                    ytemp = (i / rows);
+
+                    if (xtemp > xmax) xmax = xtemp;
+
+                    if (ytemp > ymax) ymax = ytemp;
+
+                    if (xtemp < xmin) xmin = xtemp;
+
+                    if (ytemp < ymin) ymin = ytemp;
+                }
+            }
+
+
+
+            int colsCopied = (xmax - xmin) +1;
+            int rowsCopied = (ymax - ymin) +1;
+
+
+
+            int copiedCells = colsCopied * rowsCopied;
+
+            int offsetLeft = xmin;
+            int offsetTop = ymin;
+            int offsetButtom = (rows - (ymax + 1));
+            int offsetRight = (cols - (xmax + 1));
+
+
+            
+            bool[] trueStates = new bool[copiedCells];
+            int trueCounter = 0;
+            for (int i = 0; i < NbLables; i++)
+            {
+                double colCheck = (i % cols);
+
+                double rowCheck = (i / rows);
+                rowCheck = Math.Floor(rowCheck);
+                
+
+
+
+                if (offsetLeft <= colCheck && colCheck < (cols - offsetRight) && offsetTop <= rowCheck && rowCheck <  (rows - offsetButtom))                
+                { 
+
+                    trueStates[trueCounter] = (labels[i].BackColor == Globals.Alive);
+                    trueCounter++;
+
+                }
+            }
+
+            pasteCols = colsCopied;
+            pasteRows = rowsCopied;
+
+            return trueStates;
         }
 
         public void SetLabelsFromFrame(Frame frame)
