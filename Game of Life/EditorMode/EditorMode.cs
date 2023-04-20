@@ -20,7 +20,14 @@ namespace Game_of_Life.Editor
             copy,
             paste
         }
+        public enum brushMode
+        {
+            Life,
+            Death,
+            Invert
+        }
         public editorMode mode;
+        public brushMode brush;
 
         public int brushThickness;
 
@@ -38,6 +45,8 @@ namespace Game_of_Life.Editor
         {
             this.mainLabelGrid = MainLabelGrid;
             this.editorLabelGrid = editorLabelGrid;
+            mode = editorMode.paint;
+            brush = brushMode.Invert;
 
             AssignLabelEvent(mainLabelGrid);
             AssignLabelEvent(editorLabelGrid);
@@ -81,7 +90,22 @@ namespace Game_of_Life.Editor
             {
                 if(t <= (grid.labels.Count - 1))
                 {
-                    grid.labels[t].BackColor = (grid.labels[t].BackColor == Globals.Alive) ? Globals.Dead : Globals.Alive;
+                    switch (brush)
+                    {
+                        case brushMode.Invert:
+                            grid.labels[t].BackColor = (grid.labels[t].BackColor == Globals.Alive) ? Globals.Dead : Globals.Alive;
+                            break;
+                        case brushMode.Life:
+                            grid.labels[t].BackColor = Globals.Alive;
+                            break;
+                        case brushMode.Death:
+                            grid.labels[t].BackColor = Globals.Dead;
+                            break;
+                        default:
+                            break;
+
+                    }
+                    
                 }
             }
         }

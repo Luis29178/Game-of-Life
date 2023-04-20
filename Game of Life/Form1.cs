@@ -1,6 +1,7 @@
 using Game_of_Life.Editor;
 using Game_of_Life.Frames;
 using Game_of_Life.Stucts;
+using System;
 using System.Windows.Forms;
 
 namespace Game_of_Life
@@ -11,6 +12,8 @@ namespace Game_of_Life
         EditorMode editor;
         LabelGrid gameGrid;
         LabelGrid editorGrid;
+        string mode = "Paint";
+        string brush = "Invert";
 
 
         public Form1()
@@ -21,6 +24,7 @@ namespace Game_of_Life
             gameManager = new GameManager(gameGrid);
             editor = new EditorMode(gameGrid, editorGrid);
 
+
             tmrUpdate.Interval = SpeedBar.Value;
 
             UpdateInfoDisplay();
@@ -28,7 +32,7 @@ namespace Game_of_Life
 
             SpeedValue.Text = $"{SpeedBar.Value} ms";
 
-            MInfoLabel.Text = $"Mode : Paint | Brush: Invert";
+            MInfoLabel.Text = $"Mode : {mode} | Brush: {brush}";
 
         }
 
@@ -90,7 +94,7 @@ namespace Game_of_Life
             }
             fInfoLabel.Text = $"Frame: {gameManager.frameManager.CurrentFrameIndex}/{tempframe}";
 
-            
+
 
             OnFrame.Maximum = tempframe;
 
@@ -181,14 +185,16 @@ namespace Game_of_Life
             editor.copiedFrame = new Frames.Frame(editorGrid.GetStatesfromLabelsSlim(), editorGrid.pasteCols, editorGrid.pasteRows);
             editor.mode = EditorMode.editorMode.paste;
             PaintMode.Enabled = true;
-            MInfoLabel.Text = $"Mode : Copy";
+            mode = "Copy/Paste";
+            MInfoLabel.Text = $"Mode : {mode}";
             UpdateInfoDisplay();
         }
         private void PaintEditor_click(Object obj, EventArgs e)
         {
             editor.mode = EditorMode.editorMode.paint;
             PaintMode.Enabled = false;
-            MInfoLabel.Text = $"Mode : Paint | Brush: Invert";
+            mode = "Paint";
+            MInfoLabel.Text = $"Mode : {mode} | Brush: {brush}";
             UpdateInfoDisplay();
         }
         private void NewGrid_click(object sender, EventArgs e)
@@ -223,10 +229,34 @@ namespace Game_of_Life
             //TODO: import from editor to game ase New game with the editor Frame as the center 
             UpdateInfoDisplay();
         }
-
-        private void BrushTitle_Paint(object sender, PaintEventArgs e)
+        private void InvertBrushbtn_Click(object sender, EventArgs e)
         {
+            editor.brush = EditorMode.brushMode.Invert;
+            InvertBrushbtn.Enabled = false;
+            DeathBrushbtn.Enabled = true;
+            LifeBrushbtn.Enabled = true;
+            brush = "Invert";
+            MInfoLabel.Text = $"Mode : {mode} | Brush: {brush}";
+        }
 
+        private void DeathBrushbtn_Click(object sender, EventArgs e)
+        {
+            editor.brush = EditorMode.brushMode.Death;
+            InvertBrushbtn.Enabled = true;
+            DeathBrushbtn.Enabled = false;
+            LifeBrushbtn.Enabled = true;
+            brush = "Death";
+            MInfoLabel.Text = $"Mode : {mode} | Brush: {brush}";
+        }
+
+        private void LifeBrushbtn_Click(object sender, EventArgs e)
+        {
+            editor.brush = EditorMode.brushMode.Life;
+            InvertBrushbtn.Enabled = true;
+            DeathBrushbtn.Enabled = true;
+            LifeBrushbtn.Enabled = false;
+            brush = "Life";
+            MInfoLabel.Text = $"Mode : {mode} | Brush: {brush}";
         }
     }
 }

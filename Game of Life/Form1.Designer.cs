@@ -403,32 +403,34 @@
             // 
             // InvertBrushbtn
             // 
+            InvertBrushbtn.Enabled = false;
             InvertBrushbtn.Location = new Point(307, 566);
             InvertBrushbtn.Name = "InvertBrushbtn";
             InvertBrushbtn.Size = new Size(50, 23);
             InvertBrushbtn.TabIndex = 30;
             InvertBrushbtn.Text = "Invert";
             InvertBrushbtn.UseVisualStyleBackColor = true;
+            InvertBrushbtn.Click += InvertBrushbtn_Click;
             // 
             // DeathBrushbtn
             // 
-            DeathBrushbtn.Enabled = false;
             DeathBrushbtn.Location = new Point(255, 566);
             DeathBrushbtn.Name = "DeathBrushbtn";
             DeathBrushbtn.Size = new Size(50, 23);
             DeathBrushbtn.TabIndex = 29;
             DeathBrushbtn.Text = "Death";
             DeathBrushbtn.UseVisualStyleBackColor = true;
+            DeathBrushbtn.Click += DeathBrushbtn_Click;
             // 
             // LifeBrushbtn
             // 
-            LifeBrushbtn.Enabled = false;
             LifeBrushbtn.Location = new Point(200, 566);
             LifeBrushbtn.Name = "LifeBrushbtn";
             LifeBrushbtn.Size = new Size(50, 23);
             LifeBrushbtn.TabIndex = 28;
             LifeBrushbtn.Text = "Life";
             LifeBrushbtn.UseVisualStyleBackColor = true;
+            LifeBrushbtn.Click += LifeBrushbtn_Click;
             // 
             // CopyFrame
             // 
@@ -551,7 +553,6 @@
             BrushTitle.Name = "BrushTitle";
             BrushTitle.Size = new Size(161, 15);
             BrushTitle.TabIndex = 8;
-            BrushTitle.Paint += BrushTitle_Paint;
             // 
             // Brush
             // 
