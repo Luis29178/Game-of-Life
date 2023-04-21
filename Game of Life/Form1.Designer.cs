@@ -53,23 +53,23 @@
             GameInverse = new Button();
             EditorParentPanel = new Panel();
             InverseEditor = new Button();
-            button2 = new Button();
-            SetDimentions = new Button();
-            button1 = new Button();
+            gameLinkDimentions = new Button();
+            editorSetDimentions = new Button();
+            editorLinkDimentions = new Button();
             InvertBrushbtn = new Button();
             DeathBrushbtn = new Button();
             LifeBrushbtn = new Button();
             CopyFrame = new Button();
-            GridApply = new Button();
+            gameSetDimentions = new Button();
             panel2 = new Panel();
             GridTitleLabel = new Label();
-            numericUpDown1 = new NumericUpDown();
-            numericUpDown2 = new NumericUpDown();
+            gameY = new NumericUpDown();
+            gameX = new NumericUpDown();
             label2 = new Label();
             BrushSizeLable = new Label();
             BrushSizeValue = new NumericUpDown();
-            EditorY = new NumericUpDown();
-            EditorX = new NumericUpDown();
+            editorY = new NumericUpDown();
+            editorX = new NumericUpDown();
             EditorClear = new Button();
             PaintMode = new Button();
             BrushTitle = new Panel();
@@ -91,11 +91,11 @@
             ((System.ComponentModel.ISupportInitialize)FramesToSkip).BeginInit();
             EditorParentPanel.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gameY).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gameX).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BrushSizeValue).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EditorY).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EditorX).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)editorY).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)editorX).BeginInit();
             BrushTitle.SuspendLayout();
             EditorTitle.SuspendLayout();
             SuspendLayout();
@@ -330,23 +330,23 @@
             // 
             EditorParentPanel.BackColor = SystemColors.ScrollBar;
             EditorParentPanel.Controls.Add(InverseEditor);
-            EditorParentPanel.Controls.Add(button2);
-            EditorParentPanel.Controls.Add(SetDimentions);
-            EditorParentPanel.Controls.Add(button1);
+            EditorParentPanel.Controls.Add(gameLinkDimentions);
+            EditorParentPanel.Controls.Add(editorSetDimentions);
+            EditorParentPanel.Controls.Add(editorLinkDimentions);
             EditorParentPanel.Controls.Add(InvertBrushbtn);
             EditorParentPanel.Controls.Add(DeathBrushbtn);
             EditorParentPanel.Controls.Add(LifeBrushbtn);
             EditorParentPanel.Controls.Add(CopyFrame);
-            EditorParentPanel.Controls.Add(GridApply);
+            EditorParentPanel.Controls.Add(gameSetDimentions);
             EditorParentPanel.Controls.Add(panel2);
-            EditorParentPanel.Controls.Add(numericUpDown1);
-            EditorParentPanel.Controls.Add(numericUpDown2);
+            EditorParentPanel.Controls.Add(gameY);
+            EditorParentPanel.Controls.Add(gameX);
             EditorParentPanel.Controls.Add(label2);
             EditorParentPanel.Controls.Add(BrushSizeLable);
             EditorParentPanel.Controls.Add(BrushSizeValue);
             EditorParentPanel.Controls.Add(ClearGame);
-            EditorParentPanel.Controls.Add(EditorY);
-            EditorParentPanel.Controls.Add(EditorX);
+            EditorParentPanel.Controls.Add(editorY);
+            EditorParentPanel.Controls.Add(editorX);
             EditorParentPanel.Controls.Add(EditorClear);
             EditorParentPanel.Controls.Add(GameInverse);
             EditorParentPanel.Controls.Add(PaintMode);
@@ -370,36 +370,39 @@
             InverseEditor.Text = "Inverse";
             InverseEditor.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // gameLinkDimentions
             // 
-            button2.BackColor = SystemColors.ControlLight;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(79, 655);
-            button2.Name = "button2";
-            button2.Size = new Size(25, 23);
-            button2.TabIndex = 33;
-            button2.Text = "🔗";
-            button2.UseVisualStyleBackColor = false;
+            gameLinkDimentions.BackColor = SystemColors.ControlLight;
+            gameLinkDimentions.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            gameLinkDimentions.Location = new Point(79, 655);
+            gameLinkDimentions.Name = "gameLinkDimentions";
+            gameLinkDimentions.Size = new Size(25, 23);
+            gameLinkDimentions.TabIndex = 33;
+            gameLinkDimentions.Text = "🔗";
+            gameLinkDimentions.UseVisualStyleBackColor = false;
+            gameLinkDimentions.Click += gameLinkDimentions_Click;
             // 
-            // SetDimentions
+            // editorSetDimentions
             // 
-            SetDimentions.Location = new Point(56, 507);
-            SetDimentions.Name = "SetDimentions";
-            SetDimentions.Size = new Size(75, 23);
-            SetDimentions.TabIndex = 32;
-            SetDimentions.Text = "Apply";
-            SetDimentions.UseVisualStyleBackColor = true;
+            editorSetDimentions.Location = new Point(56, 507);
+            editorSetDimentions.Name = "editorSetDimentions";
+            editorSetDimentions.Size = new Size(75, 23);
+            editorSetDimentions.TabIndex = 32;
+            editorSetDimentions.Text = "Apply";
+            editorSetDimentions.UseVisualStyleBackColor = true;
+            editorSetDimentions.Click += editorSetDimentions_Click;
             // 
-            // button1
+            // editorLinkDimentions
             // 
-            button1.BackColor = SystemColors.ControlLight;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(79, 478);
-            button1.Name = "button1";
-            button1.Size = new Size(25, 23);
-            button1.TabIndex = 31;
-            button1.Text = "🔗";
-            button1.UseVisualStyleBackColor = false;
+            editorLinkDimentions.BackColor = SystemColors.ControlLight;
+            editorLinkDimentions.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            editorLinkDimentions.Location = new Point(79, 478);
+            editorLinkDimentions.Name = "editorLinkDimentions";
+            editorLinkDimentions.Size = new Size(25, 23);
+            editorLinkDimentions.TabIndex = 31;
+            editorLinkDimentions.Text = "🔗";
+            editorLinkDimentions.UseVisualStyleBackColor = false;
+            editorLinkDimentions.Click += editorLinkDimentions_Click;
             // 
             // InvertBrushbtn
             // 
@@ -442,14 +445,15 @@
             CopyFrame.UseVisualStyleBackColor = true;
             CopyFrame.Click += PasteEditor_click;
             // 
-            // GridApply
+            // gameSetDimentions
             // 
-            GridApply.Location = new Point(56, 684);
-            GridApply.Name = "GridApply";
-            GridApply.Size = new Size(75, 25);
-            GridApply.TabIndex = 25;
-            GridApply.Text = "Apply";
-            GridApply.UseVisualStyleBackColor = true;
+            gameSetDimentions.Location = new Point(56, 684);
+            gameSetDimentions.Name = "gameSetDimentions";
+            gameSetDimentions.Size = new Size(75, 25);
+            gameSetDimentions.TabIndex = 25;
+            gameSetDimentions.Text = "Apply";
+            gameSetDimentions.UseVisualStyleBackColor = true;
+            gameSetDimentions.Click += gameSetDimentions_Click;
             // 
             // panel2
             // 
@@ -469,19 +473,27 @@
             GridTitleLabel.TabIndex = 5;
             GridTitleLabel.Text = "Grid Control";
             // 
-            // numericUpDown1
+            // gameY
             // 
-            numericUpDown1.Location = new Point(110, 655);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(54, 23);
-            numericUpDown1.TabIndex = 23;
+            gameY.Location = new Point(110, 655);
+            gameY.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            gameY.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            gameY.Name = "gameY";
+            gameY.Size = new Size(54, 23);
+            gameY.TabIndex = 23;
+            gameY.Value = new decimal(new int[] { 25, 0, 0, 0 });
+            gameY.ValueChanged += gameY_change;
             // 
-            // numericUpDown2
+            // gameX
             // 
-            numericUpDown2.Location = new Point(19, 655);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(55, 23);
-            numericUpDown2.TabIndex = 24;
+            gameX.Location = new Point(19, 655);
+            gameX.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            gameX.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            gameX.Name = "gameX";
+            gameX.Size = new Size(55, 23);
+            gameX.TabIndex = 24;
+            gameX.Value = new decimal(new int[] { 25, 0, 0, 0 });
+            gameX.ValueChanged += gameX_change;
             // 
             // label2
             // 
@@ -510,19 +522,27 @@
             BrushSizeValue.Value = new decimal(new int[] { 1, 0, 0, 0 });
             BrushSizeValue.ValueChanged += BrushSize_ValueChanged;
             // 
-            // EditorY
+            // editorY
             // 
-            EditorY.Location = new Point(110, 478);
-            EditorY.Name = "EditorY";
-            EditorY.Size = new Size(54, 23);
-            EditorY.TabIndex = 10;
+            editorY.Location = new Point(110, 478);
+            editorY.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            editorY.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            editorY.Name = "editorY";
+            editorY.Size = new Size(54, 23);
+            editorY.TabIndex = 10;
+            editorY.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            editorY.ValueChanged += editorY_change;
             // 
-            // EditorX
+            // editorX
             // 
-            EditorX.Location = new Point(19, 478);
-            EditorX.Name = "EditorX";
-            EditorX.Size = new Size(55, 23);
-            EditorX.TabIndex = 11;
+            editorX.Location = new Point(19, 478);
+            editorX.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            editorX.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            editorX.Name = "editorX";
+            editorX.Size = new Size(55, 23);
+            editorX.TabIndex = 11;
+            editorX.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            editorX.ValueChanged += editorX_change;
             // 
             // EditorClear
             // 
@@ -678,11 +698,11 @@
             EditorParentPanel.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gameY).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gameX).EndInit();
             ((System.ComponentModel.ISupportInitialize)BrushSizeValue).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EditorY).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EditorX).EndInit();
+            ((System.ComponentModel.ISupportInitialize)editorY).EndInit();
+            ((System.ComponentModel.ISupportInitialize)editorX).EndInit();
             BrushTitle.ResumeLayout(false);
             BrushTitle.PerformLayout();
             EditorTitle.ResumeLayout(false);
@@ -722,8 +742,8 @@
         private Panel EditorTitle;
         private Label BrushSizeLable;
         private NumericUpDown BrushSizeValue;
-        private NumericUpDown EditorY;
-        private NumericUpDown EditorX;
+        private NumericUpDown editorY;
+        private NumericUpDown editorX;
         private Button button14;
         private Button button13;
         private Button GameInverse;
@@ -741,16 +761,16 @@
         private NumericUpDown OnFrame;
         private Panel panel2;
         private Label GridTitleLabel;
-        private NumericUpDown numericUpDown1;
-        private NumericUpDown numericUpDown2;
+        private NumericUpDown gameY;
+        private NumericUpDown gameX;
         private Label label2;
-        private Button GridApply;
+        private Button gameSetDimentions;
         private Button CopyFrame;
         private Button InvertBrushbtn;
         private Button DeathBrushbtn;
         private Button LifeBrushbtn;
-        private Button button1;
-        private Button SetDimentions;
-        private Button button2;
+        private Button editorLinkDimentions;
+        private Button editorSetDimentions;
+        private Button gameLinkDimentions;
     }
 }

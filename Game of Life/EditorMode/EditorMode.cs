@@ -119,6 +119,10 @@ namespace Game_of_Life.Editor
             frame.blit(copiedFrame, pos);
             grid.SetLabelsFromFrame( frame );
         }
+        private void Set_Grid(LabelGrid grid)
+        {
+
+        }
 
         private void Label_Click(object sender, EventArgs e)
         {

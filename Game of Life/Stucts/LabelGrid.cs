@@ -91,10 +91,10 @@ namespace Game_of_Life.Stucts
             switch (Condition)
             {   
                 case 0:
-                    sum = (cols) * InternalSeperation;
+                    sum = (cols-1) * InternalSeperation;
                     break;
                 case 1:
-                    sum = (rows + 2) * InternalSeperation;
+                    sum = (rows-1) * InternalSeperation;
                     break;
             }
             return sum;

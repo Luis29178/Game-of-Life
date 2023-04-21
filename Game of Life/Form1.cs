@@ -2,6 +2,7 @@ using Game_of_Life.Editor;
 using Game_of_Life.Frames;
 using Game_of_Life.Stucts;
 using System;
+using System.CodeDom.Compiler;
 using System.Windows.Forms;
 
 namespace Game_of_Life
@@ -14,6 +15,8 @@ namespace Game_of_Life
         LabelGrid editorGrid;
         string mode = "Paint";
         string brush = "Invert";
+        bool editorLinkDimentionsCheck = false;
+        bool gameLinkDimentionsCheck = false;
 
 
         public Form1()
@@ -199,7 +202,7 @@ namespace Game_of_Life
         }
         private void NewGrid_click(object sender, EventArgs e)
         {
-            editorGrid.ChangeDimentions((int)EditorX.Value, (int)EditorY.Value);
+            editorGrid.ChangeDimentions((int)editorX.Value, (int)editorY.Value);
             editor.AssignLabelEvent(editorGrid);
             UpdateInfoDisplay();
         }
@@ -257,6 +260,61 @@ namespace Game_of_Life
             LifeBrushbtn.Enabled = false;
             brush = "Life";
             MInfoLabel.Text = $"Mode : {mode} | Brush: {brush}";
+        }
+
+        private void editorLinkDimentions_Click(object sender, EventArgs e)
+        {
+            editorLinkDimentionsCheck = !editorLinkDimentionsCheck;
+            editorY.Value = editorX.Value;
+        }
+
+        private void gameLinkDimentions_Click(object sender, EventArgs e)
+        {
+            gameLinkDimentionsCheck = !gameLinkDimentionsCheck;
+            gameY.Value = gameX.Value;
+        }
+
+        private void editorSetDimentions_Click(object sender, EventArgs e)
+        {
+            EditorPanel.Controls.Clear();
+            editorGrid = new LabelGrid(EditorPanel, (int)editorX.Value, (int)editorY.Value, 10, 10, 1);
+            editor = new EditorMode(gameGrid, editorGrid);
+        }
+
+        private void gameSetDimentions_Click(object sender, EventArgs e)
+        {
+            GamePanel.Controls.Clear();
+            gameGrid = new LabelGrid(GamePanel, (int)gameX.Value, (int)gameY.Value, 10, 10, 1);
+            editor = new EditorMode(gameGrid, editorGrid);
+            gameManager = new GameManager(gameGrid);
+        }
+        private void editorX_change(object sender, EventArgs e)
+        {
+            if (editorLinkDimentionsCheck)
+            {
+                editorY.Value = editorX.Value;
+            }
+        }
+        private void editorY_change(object sender, EventArgs e)
+        {
+            if (editorLinkDimentionsCheck)
+            {
+                editorX.Value = editorY.Value;
+            }
+        }
+        private void gameX_change(object sender, EventArgs e)
+        {
+            if (gameLinkDimentionsCheck)
+            {
+                gameY.Value = gameX.Value;
+            }
+        }
+        private void gameY_change(object sender, EventArgs e)
+        {
+            if (gameLinkDimentionsCheck)
+            {
+                gameX.Value = gameY.Value;
+            }
         }
     }
 }
